@@ -31,27 +31,27 @@ function displayWeatherData(data) {
 async function login() {
     const email = document.getElementById('emailInput').value;
     const password = document.getElementById('passwordInput').value;
+    let response; // Declare the response variable outside the try block
+
     try {
-        const response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/token', {
+        response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/token', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
             body: `username=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`
         });
+
         if (!response.ok) {
             throw new Error('Login failed. Please check your credentials.');
         }
+
         const data = await response.json();
-        // Store token or handle authenticated state
         console.log('Access Token:', data.access_token);
-    } catch (error) {
-        console.error('There was a problem with the login operation:', error);
-    }
-    if (response.ok) {
         document.getElementById("loginMessage").innerHTML = "Login successful!";
         document.getElementById("loginMessage").classList.add("success");
-    } else {
+    } catch (error) {
+        console.error('There was a problem with the login operation:', error);
         document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
         document.getElementById("loginMessage").classList.add("error");
     }
@@ -60,30 +60,32 @@ async function login() {
 async function createUser() {
     const email = document.getElementById('newEmailInput').value;
     const password = document.getElementById('newPasswordInput').value;
+    let response; // Declare the response variable outside the try block
+
     try {
-        const response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/users/', {
+        response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/users/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({ email, password })
         });
+
         if (!response.ok) {
             throw new Error('User creation failed.');
         }
+
         const data = await response.json();
         console.log('User created:', data);
+        document.getElementById("createUserMessage").innerHTML = "User created successfully!";
+        document.getElementById("createUserMessage").classList.add("success");
     } catch (error) {
         console.error('There was a problem with creating the user:', error);
-    }
-    if (response.ok) {
-        document.getElementById("loginMessage").innerHTML = "Login successful!";
-        document.getElementById("loginMessage").classList.add("success");
-    } else {
-        document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
-        document.getElementById("loginMessage").classList.add("error");
+        document.getElementById("createUserMessage").innerHTML = "Failed to create user. Please try again.";
+        document.getElementById("createUserMessage").classList.add("error");
     }
 }
+
 
 async function addForecast() {
     const city = document.getElementById('cityInput').value;
@@ -92,9 +94,10 @@ async function addForecast() {
     const high = parseFloat(document.getElementById('highInput').value);
     const low = parseFloat(document.getElementById('lowInput').value);
     const token = ''; // Provide the access token obtained after login
+    let response; // Declare the response variable outside the try block
 
     try {
-        const response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/forecast/', {
+        response = await fetch('https://forecast-api-service-tuurhulselmans.cloud.okteto.net/forecast/', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,19 +105,18 @@ async function addForecast() {
             },
             body: JSON.stringify({ city, date, description, temperature_high: high, temperature_low: low })
         });
+
         if (!response.ok) {
             throw new Error('Adding forecast failed.');
         }
+
         const data = await response.json();
         console.log('Forecast added:', data);
+        document.getElementById("addForecastMessage").innerHTML = "Forecast added successfully!";
+        document.getElementById("addForecastMessage").classList.add("success");
     } catch (error) {
         console.error('There was a problem with adding the forecast:', error);
-    }
-    if (response.ok) {
-        document.getElementById("loginMessage").innerHTML = "Login successful!";
-        document.getElementById("loginMessage").classList.add("success");
-    } else {
-        document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
-        document.getElementById("loginMessage").classList.add("error");
+        document.getElementById("addForecastMessage").innerHTML = "Failed to add forecast. Please try again.";
+        document.getElementById("addForecastMessage").classList.add("error");
     }
 }
