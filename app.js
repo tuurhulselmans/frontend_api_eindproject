@@ -120,3 +120,38 @@ async function addForecast() {
         document.getElementById("addForecastMessage").classList.add("error");
     }
 }
+
+function displayWeatherData(data) {
+    const weatherDisplay = document.getElementById('weatherDisplay');
+    weatherDisplay.innerHTML = ''; // Clear previous data
+    if (data.length === 0) {
+        weatherDisplay.innerHTML = '<div class="message error">No forecast data found for this city.</div>';
+        return;
+    }
+
+    const forecastContainer = document.createElement('div');
+    forecastContainer.classList.add('forecast-container');
+
+    data.forEach(forecast => {
+        const forecastCard = document.createElement('div');
+        forecastCard.classList.add('forecast-card');
+
+        const date = document.createElement('p');
+        date.textContent = `Date: ${forecast.date}`;
+
+        const description = document.createElement('p');
+        description.textContent = `Description: ${forecast.description}`;
+
+        const temperature = document.createElement('p');
+        temperature.textContent = `Temperature: High ${forecast.temperature_high}°C, Low ${forecast.temperature_low}°C`;
+
+        forecastCard.appendChild(date);
+        forecastCard.appendChild(description);
+        forecastCard.appendChild(temperature);
+
+        forecastContainer.appendChild(forecastCard);
+    });
+
+    weatherDisplay.appendChild(forecastContainer);
+}
+

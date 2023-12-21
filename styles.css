@@ -46,6 +46,7 @@ button {
     width: 28%;
     padding: 7px;
     margin-top: 10px;
+    margin-bottom: 7px;
     background-color: #007bff;
     color: #fff;
     border: none;
@@ -59,17 +60,44 @@ button:hover {
 }
 
 .message {
-    margin-top: 10px;
-    padding: 5px;
-    border-radius: 5px;
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 .success {
     background-color: #a0d468;
     color: #fff;
+    width: 60%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .error {
     background-color: #ed5565;
     color: #fff;
+    width: 60%;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.forecast-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.forecast-card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
