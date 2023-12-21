@@ -50,8 +50,10 @@ async function login() {
     }
     if (response.ok) {
         document.getElementById("loginMessage").innerHTML = "Login successful!";
+        document.getElementById("loginMessage").classList.add("success");
     } else {
         document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
+        document.getElementById("loginMessage").classList.add("error");
     }
 }
 
@@ -75,9 +77,11 @@ async function createUser() {
         console.error('There was a problem with creating the user:', error);
     }
     if (response.ok) {
-        document.getElementById("createUserMessage").innerHTML = "User created successfully!";
+        document.getElementById("loginMessage").innerHTML = "Login successful!";
+        document.getElementById("loginMessage").classList.add("success");
     } else {
-        document.getElementById("createUserMessage").innerHTML = "Failed to create user. Please try again.";
+        document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
+        document.getElementById("loginMessage").classList.add("error");
     }
 }
 
@@ -107,8 +111,10 @@ async function addForecast() {
         console.error('There was a problem with adding the forecast:', error);
     }
     if (response.ok) {
-        document.getElementById("addForecastMessage").innerHTML = "Forecast added successfully!";
+        document.getElementById("loginMessage").innerHTML = "Login successful!";
+        document.getElementById("loginMessage").classList.add("success");
     } else {
-        document.getElementById("addForecastMessage").innerHTML = "Failed to add forecast. Please try again.";
+        document.getElementById("loginMessage").innerHTML = "Login failed. Please check your credentials.";
+        document.getElementById("loginMessage").classList.add("error");
     }
 }
