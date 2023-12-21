@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Forecast</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<h1>Weather Forecast</h1>
+<div class="container">
+<div>
+    <h2>Login</h2>
+    <label for="emailInput">Email:</label>
+    <input type="email" id="emailInput" required>
+    <label for="passwordInput">Password:</label>
+    <input type="password" id="passwordInput" required>
+    <button onclick="login()">Login</button>
+</div>
+
+<hr>
+
+<div>
+    <h2>Create User</h2>
+    <label for="newEmailInput">New Email:</label>
+    <input type="email" id="newEmailInput" required>
+    <label for="newPasswordInput">New Password:</label>
+    <input type="password" id="newPasswordInput" required>
+    <button onclick="createUser()">Create User</button>
+</div>
+
+<hr>
+
+<div>
+    <h2>Add Weather Forecast</h2>
+    <label for="cityInput">City:</label>
+    <input type="text" id="cityInput" required>
+    <label for="dateInput">Date:</label>
+    <input type="date" id="dateInput" placeholder="YYYY-MM-DD" required>
+    <label for="descriptionInput">Description:</label>
+    <input type="text" id="descriptionInput" required>
+    <label for="highInput">High Temp:</label>
+    <input type="number" id="highInput" step="0.1" required>
+    <label for="lowInput">Low Temp:</label>
+    <input type="number" id="lowInput" step="0.1" required>
+    <button onclick="addForecast()">Add Forecast</button>
+</div>
+
+<hr>
+
+<div>
+    <h2>Get Weather Forecast</h2>
+    <label for="cityInput">Enter City:</label>
+    <input type="text" id="cityInput1">
+    <button onclick="getWeather()">Get Forecast</button>
+</div>
+</div>
+<div id="weatherDisplay"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
