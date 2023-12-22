@@ -13,20 +13,46 @@ async function getWeather() {
 }
 
 function displayWeatherData(data) {
-    const weatherDisplay = document.getElementById('weatherDisplay');
-    weatherDisplay.innerHTML = ''; // Clear previous data
-    if (data.length === 0) {
-        weatherDisplay.innerHTML = 'No forecast data found for this city.';
-        return;
-    }
-    const ul = document.createElement('ul');
+    const labels = [];
+    const highTemperatures = [];
+    const lowTemperatures = [];
+
     data.forEach(forecast => {
-        const li = document.createElement('li');
-        li.textContent = `Date: ${forecast.date}, Description: ${forecast.description}, High: ${forecast.temperature_high}, Low: ${forecast.temperature_low}`;
-        ul.appendChild(li);
+        labels.push(forecast.date);
+        highTemperatures.push(forecast.temperature_high);
+        lowTemperatures.push(forecast.temperature_low);
     });
-    weatherDisplay.appendChild(ul);
+
+    const ctx = document.getElementById('weatherChart').getContext('2d');
+    const weatherChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'High Temp (°C)',
+                data: highTemperatures,
+                borderColor: 'rgba(255, 99, 132, 1)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+            },
+                {
+                    label: 'Low Temp (°C)',
+                    data: lowTemperatures,
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
 }
+
 
 async function login() {
     const email = document.getElementById('emailInput').value;
